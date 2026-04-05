@@ -1,0 +1,17 @@
+# Put one class name per line, in the SAME order used during model training.
+# Example:
+# beef
+# chicken
+# lamb
+# pork
+# fish
+# goat
+# other
+
+chicken
+cow
+donkey
+goat
+pig
+sheep
+unknown

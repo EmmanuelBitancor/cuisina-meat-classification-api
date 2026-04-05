@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Meat Vision Client</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Bebas+Neue&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <section class="hero">
+        <p class="badge">TFLITE FRONTEND SAMPLE</p>
+        <h1>Meat Vision Client</h1>
+        <p class="subtitle">
+          Upload an image and get top predictions from your FastAPI + TensorFlow Lite model.
+        </p>
+      </section>
+
+      <section class="panel">
+        <div class="row">
+          <label for="apiBase">API Base URL</label>
+          <input id="apiBase" type="text" value="http://127.0.0.1:8000" />
+        </div>
+
+        <div class="row row-grid">
+          <div>
+            <label for="topK">Top-K</label>
+            <input id="topK" type="number" min="1" max="7" value="5" />
+          </div>
+          <button id="checkApiBtn" class="ghost" type="button">Check API</button>
+        </div>
+
+        <label class="upload" for="imageInput">
+          <input id="imageInput" type="file" accept="image/*" hidden />
+          <span class="upload-title">Drop image or click to browse</span>
+          <span class="upload-note">JPG, PNG, WEBP</span>
+        </label>
+
+        <div id="previewWrap" class="preview hidden">
+          <img id="previewImage" alt="Uploaded preview" />
+        </div>
+
+        <button id="predictBtn" class="primary" type="button" disabled>
+          Run Prediction
+        </button>
+
+        <p id="status" class="status">Select an image to begin.</p>
+      </section>
+
+      <section class="panel results-panel">
+        <div class="results-head">
+          <h2>Predictions</h2>
+          <span id="filename" class="filename"></span>
+        </div>
+        <ul id="results" class="results"></ul>
+
+        <article class="viz-card model-viz">
+          <h3>Trained Model Probability Graph</h3>
+          <div id="inferenceGraph" class="graph-wrap"></div>
+          <div id="inferenceStats" class="legend"></div>
+        </article>
+      </section>
+
+      <section class="panel advanced-toggle-panel">
+        <div class="results-head">
+          <h2>Advanced Tools</h2>
+          <button id="toggleAdvancedBtn" class="ghost" type="button">
+            Show Advanced Evaluation
+          </button>
+        </div>
+      </section>
+
+      <section id="evalPanel" class="panel eval-panel is-hidden">
+        <div class="results-head">
+          <h2>Optional Validation Dataset Evaluation</h2>
+          <div class="row-inline">
+            <span id="evalSummary" class="filename"></span>
+            <button id="hideAdvancedBtn" class="ghost small-pill" type="button">Hide</button>
+          </div>
+        </div>
+
+        <p class="subtitle tiny">
+          Confusion matrix and classification report are dataset metrics. They require labeled
+          validation images in class subfolders (for example: chicken/, cow/, goat/...).
+        </p>
+
+        <label class="upload small" for="datasetInput">
+          <input id="datasetInput" type="file" webkitdirectory directory multiple hidden />
+          <span class="upload-title">Select dataset folder</span>
+          <span class="upload-note">Folder structure: class_name/image_files</span>
+        </label>
+
+        <div class="row row-grid eval-actions">
+          <div></div>
+          <button id="evaluateBtn" class="primary" type="button">Run Dataset Evaluation</button>
+        </div>
+
+        <p id="evalStatus" class="status">Choose a dataset folder to evaluate.</p>
+
+        <div class="viz-grid">
+          <article class="viz-card">
+            <h3>Confusion Matrix</h3>
+            <div id="confusionMatrix" class="matrix-wrap"></div>
+          </article>
+
+          <article class="viz-card">
+            <h3>Classification Report Graph</h3>
+            <div id="reportGraph" class="graph-wrap"></div>
+          </article>
+
+          <article class="viz-card">
+            <h3>Prediction Probability Stats Graph</h3>
+            <div id="probabilityGraph" class="graph-wrap"></div>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
