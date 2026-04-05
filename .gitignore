@@ -8,7 +8,3 @@ __pycache__/
 # Local outputs
 evaluation_reports/
 *.log
-
-# Large model artifacts (excluded from standard GitHub push)
-*.keras
-*.tflite
