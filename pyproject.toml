@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "meat-classification-api"
+version = "0.1.0"
+description = ""
+authors = ["Your Name <you@example.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+fastapi = "0.115.6"
+uvicorn = "0.34.0"
+numpy = "1.26.4"
+tensorflow-cpu = "2.16.2"
+Pillow = "10.4.0"
+python-multipart = "0.0.20"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
