@@ -1,15 +1,6 @@
-tensorflow==2.16.1
-fastapi==0.115.0
-uvicorn[standard]==0.30.6
-pillow==10.4.0
-python-multipart==0.0.9
+fastapi==0.115.6
+uvicorn[standard]==0.34.0
 numpy==1.26.4
-matplotlib==3.9.2
-pandas==2.2.2
-seaborn==0.13.2
-scikit-learn==1.5.1
-
-# Needed to load/convert meat_classification_trained_mobilenetv5_model.keras
-keras-hub==0.27.1
-tokenizers==0.19.1
-sentencepiece==0.2.0
+tensorflow-cpu==2.16.2
+Pillow==10.4.0
+python-multipart==0.0.20
