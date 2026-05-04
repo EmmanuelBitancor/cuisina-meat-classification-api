@@ -179,6 +179,14 @@ def health() -> dict[str, Any]:
     }
 
 
+@app.get("/")
+def root() -> dict[str, str]:
+    return {
+        "status": "live",
+        "message": "Service is live.",
+    }
+
+
 @app.post("/predict")
 async def predict(
     file: UploadFile = File(...),
