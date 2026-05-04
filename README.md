@@ -32,6 +32,12 @@ Optional float16 conversion:
 
 For memory-limited deployments, the float16 model is strongly recommended.
 
+If you want the smaller improved model, convert `meat_model_improved.keras`:
+
+```powershell
+.\.venv\Scripts\python.exe convert_to_tflite.py --keras-model meat_model_improved.keras --float16 --tflite-out meat_model_improved_float16.tflite
+```
+
 ## 3) Run the API
 
 ```powershell

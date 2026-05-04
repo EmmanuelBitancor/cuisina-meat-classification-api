@@ -8,3 +8,12 @@ __pycache__/
 # Local outputs
 evaluation_reports/
 *.log
+
+# Large local model artifacts not needed for deploy
+meat_classification_trained_mobilenetv5_model.keras
+meat_model.tflite
+meat_model_improved.keras
+meat_model_improved.tflite
+meat_model_int8.tflite
+meat_model_float16.tflite
+meat_model_improved_int8.tflite

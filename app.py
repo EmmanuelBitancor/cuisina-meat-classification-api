@@ -21,6 +21,9 @@ APP_TITLE = "Meat Classification (TFLite API)"
 
 # Prefer smaller TFLite artifacts when present to reduce runtime memory usage.
 DEFAULT_TFLITE_CANDIDATES = [
+    "meat_model_improved_float16.tflite",
+    "meat_model_improved_int8.tflite",
+    "meat_model_improved.tflite",
     "meat_model_float16.tflite",
     "meat_model_int8.tflite",
     "meat_model.tflite",
