@@ -7,7 +7,12 @@ from pathlib import Path
 from typing import Any
 
 import numpy as np
-import tensorflow as tf
+try:
+    from tflite_runtime.interpreter import Interpreter
+except ModuleNotFoundError:  # pragma: no cover - fallback for local conversions
+    import tensorflow as tf
+
+    Interpreter = tf.lite.Interpreter
 from fastapi import FastAPI, File, HTTPException, Query, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from PIL import Image
@@ -55,12 +60,12 @@ app.add_middleware(
 )
 
 
-def _load_interpreter(model_path: Path) -> tf.lite.Interpreter:
+def _load_interpreter(model_path: Path) -> Any:
     if not model_path.exists():
         raise FileNotFoundError(
             f"TFLite model not found at {model_path}. Run convert_to_tflite.py first."
         )
-    interpreter = tf.lite.Interpreter(model_path=str(model_path))
+    interpreter = Interpreter(model_path=str(model_path))
     interpreter.allocate_tensors()
     return interpreter
 

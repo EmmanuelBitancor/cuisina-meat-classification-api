@@ -47,6 +47,9 @@ def _apply_common_converter_options(
     use_float16: bool,
     allow_select_tf_ops: bool,
 ) -> None:
+    # Enable default optimizations (quantization) to reduce model size
+    converter.optimizations = [tf.lite.Optimize.DEFAULT]
+
     if allow_select_tf_ops:
         converter.target_spec.supported_ops = [
             tf.lite.OpsSet.TFLITE_BUILTINS,
@@ -54,7 +57,6 @@ def _apply_common_converter_options(
         ]
 
     if use_float16:
-        converter.optimizations = [tf.lite.Optimize.DEFAULT]
         converter.target_spec.supported_types = [tf.float16]
 
 

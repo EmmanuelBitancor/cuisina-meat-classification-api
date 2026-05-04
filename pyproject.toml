@@ -9,7 +9,8 @@ python = "^3.11"
 fastapi = "0.115.6"
 uvicorn = "0.34.0"
 numpy = "1.26.4"
-tensorflow-cpu = "2.16.2"
+tflite-runtime = { version = "2.16.1", markers = "sys_platform != 'win32'" }
+tensorflow-cpu = { version = "2.16.2", markers = "sys_platform == 'win32'" }
 Pillow = "10.4.0"
 python-multipart = "0.0.20"
 
