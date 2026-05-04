@@ -19,8 +19,29 @@ from PIL import Image
 
 APP_TITLE = "Meat Classification (TFLite API)"
 
+# Prefer smaller TFLite artifacts when present to reduce runtime memory usage.
+DEFAULT_TFLITE_CANDIDATES = [
+    "meat_model_float16.tflite",
+    "meat_model_int8.tflite",
+    "meat_model.tflite",
+]
+
+
+def _pick_tflite_model_path() -> Path:
+    env_path = os.getenv("TFLITE_MODEL_PATH")
+    if env_path:
+        return Path(env_path).expanduser().resolve()
+
+    for name in DEFAULT_TFLITE_CANDIDATES:
+        candidate = Path(name).resolve()
+        if candidate.exists():
+            return candidate
+
+    return Path(DEFAULT_TFLITE_CANDIDATES[-1]).resolve()
+
+
 # Path to the .tflite file produced by convert_to_tflite.py
-TFLITE_MODEL_PATH = Path(os.getenv("TFLITE_MODEL_PATH", "meat_model.tflite")).resolve()
+TFLITE_MODEL_PATH = _pick_tflite_model_path()
 LABELS_PATH = Path(os.getenv("LABELS_PATH", "labels.txt")).resolve()
 
 # Optional: comma-separated labels for output indices (length should match output size).

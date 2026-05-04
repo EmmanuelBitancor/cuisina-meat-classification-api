@@ -5,11 +5,17 @@ This folder contains:
 - `convert_to_tflite.py` — converts the provided `.keras` model into a `.tflite` model
 - `app.py` — FastAPI server that runs inference using the TFLite Interpreter
 
-## 1) Install
+## 1) Install (runtime)
 
 ```powershell
 # from this folder
 .\.venv\Scripts\python.exe -m pip install -r requirements.txt
+```
+
+If you plan to convert `.keras` to `.tflite`, install the conversion dependencies too:
+
+```powershell
+.\.venv\Scripts\python.exe -m pip install -r requirements-convert.txt
 ```
 
 ## 2) Convert `.keras` → `.tflite`
@@ -24,12 +30,18 @@ Optional float16 conversion:
 .\.venv\Scripts\python.exe convert_to_tflite.py --float16 --tflite-out meat_model_float16.tflite
 ```
 
+For memory-limited deployments, the float16 model is strongly recommended.
+
 ## 3) Run the API
 
 ```powershell
 $env:TFLITE_MODEL_PATH = "meat_model.tflite"
 .\.venv\Scripts\python.exe -m uvicorn app:app --host 0.0.0.0 --port 8000
 ```
+
+If you have `meat_model_float16.tflite` or `meat_model_int8.tflite` present,
+the API will automatically prefer the smaller model unless you set
+`TFLITE_MODEL_PATH` explicitly.
 
 Health check:
 
